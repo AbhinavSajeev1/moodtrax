@@ -1,0 +1,319 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+
+}
+
+main {
+    background: linear-gradient(white, lightblue);
+    min-height: 100vh;
+}
+
+
+#logo {
+    width: 333px;
+    height: 37px;
+    margin-top: 15px;
+    margin-left: 15px; 
+}
+
+#logo:hover {
+    cursor: pointer; 
+}
+
+header {
+    display: flex; 
+    border-bottom: solid 2px lightgray; 
+    justify-content: center;
+}
+
+nav {
+    width: 100%;
+    background-color: white; 
+    display: flex; 
+    justify-content: flex-end; 
+    gap: 20px;
+    align-items: center;
+
+}
+
+.navlist {
+    display: inline-block;
+    padding: 15px;
+    list-style-type: none; 
+    font-family: "Open Sans", sans-serif; 
+}
+
+a {
+    color: #333333;
+    text-decoration: none;
+    transition: color 0.3s linear;
+
+    -webkit-transition: color 0.3s linear;
+    -moz-transition: color 0.3s linear;
+}
+
+a:hover {
+    color: #F44336;
+
+}
+
+#toolbar-button {
+    color: white; 
+    border: none;
+    background-color: lightgreen; 
+    border-radius: 20px;
+    padding: 10px; 
+    font-family: 'Open Sans', sans-serif;
+    transition: color 0.3s linear;
+    -webkit-transition: color 0.3s linear;
+    -moz-transition: color 0.3s linear;
+}
+
+#toolbar-button:hover {
+    cursor: pointer; 
+    color: rgba(0, 0, 0, 0.737);
+}
+
+.half-width-div {
+    width: 50vw;
+    height: 100vh; 
+    top: 0;
+    left: 0; 
+    padding-left: 100px; 
+}
+
+
+#slogan {
+    padding: 50px 0px 50px 0px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 40px;
+}
+
+#intro {
+    padding: 50px 0px 50px 0px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 25px;
+}
+
+#body-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    background-color: lightgreen; 
+    border-radius: 20px;
+    padding: 15px; 
+    transition-duration: 0.4s;
+    color: white; 
+    font-size: 20px;
+    transition-duration: color 0.3s linear;
+}
+
+#body-button:hover {
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.737);
+}
+
+.right-half-width-div {
+    float: right;
+    margin-top: -850px;
+    padding-right: 50px;
+}
+
+.header-title {
+    display: flex;
+    justify-content: center;
+    font-family: "Montserrat", sans-serif;
+    padding-top: 50px; 
+}
+
+.all-cards {
+    display: flex; 
+    justify-content: space-evenly;
+}
+.card {
+    display: inline-flex;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.2s;
+    width: 30%; 
+    border-radius: 20px;
+    margin-top: 25px;
+}
+
+.card:hover { 
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 75px; 
+    gap: 20px; 
+
+}
+
+.card-title {
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+}
+
+.card-text {
+    font-family: "Open Sans", sans-serif;
+    text-align: center;
+}
+
+.form {
+    display: flex; 
+    justify-content: center;
+    padding: 20px;
+}
+
+input[type="range"] {
+    display: flex;
+    justify-content: center;
+}
+
+label {
+    display: flex;
+    justify-content: center;
+}
+
+input[type=text] {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 20px;
+}
+
+input[type="range"] {
+    display: block; 
+    margin: 0 auto;
+}
+
+input[type="submit"] {
+    display: block;
+    margin: 0 auto;
+}
+
+.collapsible { 
+    background-color: black;
+    color: white; 
+    cursor: pointer;
+    width: 300px;
+    height: 50px; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    font-family: "Open Sans", sans-serif;
+    transition: background-color 0.2s linear; 
+}
+
+.active, .collapsible:hover {
+    background-color: #000000d0;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #ccc; 
+    width: 100%;
+    height: 100vh; 
+    border-radius: 0px 0px 15px 15px;
+    transition: max-height 0.5s ease-out; 
+    -moz-transition: max-height 0.5s ease-out;
+}
+
+#value {
+    display: flex;
+    justify-content: center;
+}
+
+.myChart {
+    flex: 1; 
+}
+
+.tracker-page #parent-container {
+    display: flex;
+    width: 100%;
+}
+
+.form-section {
+    width: 300px; 
+}
+
+#canvas-div {
+    display: flex;
+
+    justify-content: center;
+    flex: 1;
+    width: 100%;
+    max-width: 700px; 
+    max-height: 350px; 
+    padding-top: 10px;
+    
+}
+
+#myChart {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#mood-data {
+    display: flex;
+    flex: 1; 
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+}
+
+#hidden-container {
+    display: none; 
+    flex-direction: column;
+    align-items: center;
+    font-family: "Open Sans", sans-serif;
+    background-color: #1E3A5F; 
+    color: white; 
+    padding: 15px; 
+    border-radius: 10px;
+}
+
+#clickpoint {
+    display: flex; 
+    font-family: "Open Sans", sans-serif;
+    
+}
+
+#bodyList {
+    display: flex; 
+}
+
+#entryCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1
+}
+
+#entriesList {
+    display: flex; 
+    gap: 10px; 
+    padding-bottom: 10px;
+}
+
+#line-break {
+    width: 100%
+}
+
+#moodChart {
+    display: flex; 
+    width: 50%;
+    height: 50% fixed;
+    justify-content: center; 
+}
