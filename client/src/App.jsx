@@ -20,10 +20,38 @@ function App() {
   const[editMood, setEditMood] = useState(0);
 
   useEffect(() => {
+
+
+  const getEntries = async () => {
+      const res = await fetch("http://localhost:3001/entries")
+      const data = await res.json();
+      setEntries(data);
+  };
+
+  getEntries();
+
     localStorage.setItem("entries", JSON.stringify(entries))}, [entries])
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    fetch("http://localhost:3001/entries", {
+      method: "POST", 
+      body: JSON.stringify({
+        id: crypto.randomUUID(),
+        mood: mood, 
+        note: note, 
+        time: new Date().toLocaleString()
+      }),
+      headers: {
+        "Content-type" : "application/json; charset=UTF-8"
+      }
+    })
+    .then(res=> res.json())
+    .then(data => {
+      console.log("Server response:", data)
+    })
+
 
     const newEntry = {
       id: crypto.randomUUID(),
