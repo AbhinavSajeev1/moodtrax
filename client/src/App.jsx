@@ -28,11 +28,11 @@ function App() {
       setEntries(data);
   };
 
-  getEntries();
+    getEntries();
 
-    localStorage.setItem("entries", JSON.stringify(entries))}, [entries])
-
-  const handleSubmit = (e) => {
+    }, [])
+    
+    const handleSubmit = (e) => {
     e.preventDefault()
 
     fetch("http://localhost:3001/entries", {
@@ -65,32 +65,24 @@ function App() {
     setMood(5);
   }
 
-  const deleteEntry = (id) => {
-    setEntries(
-      entries.filter((entry)=> entry.id !== id)
-    );
+  const deleteEntry = async (id) => {
+    await fetch(`http://localhost:3001/entries/${id}`, {method: 'DELETE'})
+
+    setEntries(prev => prev.filter(entry => entry.id !== id))
   }
 
-  const editEntry = (id) => {
-
-    const entry = entries.find((e) => e.id === id);
-    setEditState(id);
-    setEditMood(entry.mood);
-
-
-
+  const editEntry = (id, currentMood) => {
+    setEditState(id)
+    setEditMood(currentMood)
   }
 
-  const saveEdit = () => {
-    setEntries((prev) =>
-      prev.map((entry) => entry.id === editState
-      ? {
-        ...entry, mood: editMood
-      }
-  : entry
-)
-);
-  setEditState(null)
+  const saveEdit = async () => {
+    await fetch(`http://localhost:3001/entries/${editState}`, {method: 'PUT', headers: { "Content-Type": "application/json" }, body: JSON.stringify({mood: editMood} )})
+    setEntries(prev => prev.map(entry => entry.id === editState 
+      ? {...entry, mood: editMood}
+      : entry
+    ))
+    setEditState(null);
 }
 
   const cancelEdit = () => {

@@ -2,7 +2,7 @@ function EntryCard({key, entry, onEdit, onDelete, editMood, editState, setEditMo
 
     const isEditing = editState === entry.id 
 
-    
+    console.log(onDelete)
 
 
     return (
