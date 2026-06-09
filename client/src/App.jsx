@@ -10,10 +10,7 @@ function App() {
 
   const [mood, setMood] = useState(5);
   const [note, setNote] = useState("");
-  const [entries, setEntries] = useState(() => {
-      const saved = localStorage.getItem("entries")
-      return saved ? JSON.parse(saved) : [];
-  });
+  const [entries, setEntries] = useState([]);
   const [showContent, setShowContent] = useState(false)
 
   const[editState, setEditState] = useState(null);
