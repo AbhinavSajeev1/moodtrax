@@ -31,7 +31,7 @@ app.get("/entries", async (req, res) => {
             res.json({success: false})
         }
         else {
-            res.json({success: true})
+            res.json(result.data)
         }
     }
     catch (err) {
