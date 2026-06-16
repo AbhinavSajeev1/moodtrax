@@ -1,9 +1,15 @@
+require("dotenv").config()
 const express = require("express");
 const cors = require("cors");
 const pool = require("./db")
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+const { createClient } = require("@supabase/supabase-js");
+
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY)
+
 
 
 let data = [
@@ -17,8 +23,16 @@ let data = [
 
 app.get("/entries", async (req, res) => {
     try {
-        const result = await pool.query("SELECT * FROM entries");
-        res.json(result.rows)
+        const result = await supabase
+        .from("entries")
+        .select('*')
+
+        if (result.error) {
+            res.json({success: false})
+        }
+        else {
+            res.json({success: true})
+        }
     }
     catch (err) {
         console.error(err)
@@ -29,30 +43,49 @@ app.get("/entries", async (req, res) => {
 app.post("/entries", async (req, res) => {
 
     try {
-        const query = "INSERT INTO entries (id, mood, note, time) VALUES ($1, $2, $3, $4) RETURNING *"
         const {id, mood, note, time} = req.body
-
-        const values = [id, mood, note, time]
-        const result = await pool.query(query, values)
-
-        res.status(201).json({
-            message: "User created successfully",
-            entry: result.rows[0]
+        const entryEnter = await supabase
+        .from("entries")
+        .insert({
+            id: id, mood: mood, note: note, time: time
         })
+        .select()
+
+        if (entryEnter.error) {
+            res.json({success: false})
+        }
+        else if (entryEnter.data.length = 0) {
+            res.json({success: false})
+        }
+        else {
+            res.json({success: true})
+        }
     }
 
-    catch (err) {
-        console.error(err)
+    catch (error) {
+        console.error(error)
         res.status(500).json({error: "Database error"})
     }
 })
 
 app.delete('/entries/:id', async (req, res) => {
     try {
-
         const { id } = req.params
-        await pool.query("DELETE FROM entries WHERE id = $1", [id])
-        res.json({success: true})   
+        const response = await supabase
+            .from("entries")
+            .delete()
+            .eq('id', id)
+            .select()
+            console.log(response)
+        if (response.error) {
+            res.json({success: false})   
+        }
+        else if (response.data.length == 0){
+            res.json({success: false})
+        }
+        else {
+            res.json({success: true})
+        }
     }
 
     catch (err) {
@@ -63,14 +96,26 @@ app.delete('/entries/:id', async (req, res) => {
 
 app.put('/entries/:id', async (req, res) => {
     try {
-        const { id } = req.params;
-        const { mood } = req.body; 
+        const { id } = req.params
+        const { mood } = req.body
 
-        const result = await pool.query(
-            "UPDATE entries SET mood = $1 WHERE id = $2 RETURNING *", [mood, id]
-        )
+        const response = await supabase
+            .from("entries")
+            .update({mood})
+            .eq('id', id)
+            .select()
 
-        res.json(result.rows[0])
+        console.log(response)
+
+        if (response.error) {
+            res.json({success: false})
+        }
+        else if (response.data.length === 0) {
+            res.json({success: false})
+        }
+        else {
+            res.json({success: true})
+        }
     }
     catch (err) {
         console.error(err)
