@@ -3,6 +3,7 @@ import {useEffect} from "react";
 import EntryCard from "./EntryCard"
 import Form from "./form"
 import Graph from "./Graph"
+import AuthForm from "./AuthForm"
 import "./App.css"
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
 
   const[editState, setEditState] = useState(null);
   const[editMood, setEditMood] = useState(0);
+  const[loginState, setLoginState] = useState("")
 
   useEffect(() => {
 
@@ -86,67 +88,74 @@ function App() {
     setEditState(null)
   }
 
-  return (
-    <div>
-      <header>
-        <h1>Mood Tracker</h1>
-      </header>
-      <main>
-      <div id="bodyList">
-        <div className="form-section">
-                  <button type="button" className="collapsible" id="collapsible" onClick={() => {
-                    if (showContent) {
-                      setShowContent(false) }
-                    else {
-                      setShowContent(true)}}}>Form</button>
-                  {showContent && (
-                  <div className="content">
-                      <div className="form">
-                          <Form
-                            handleSubmit = {handleSubmit}
-                            mood = {mood}
-                            note = {note}
-                            setMood = {setMood}
-                            setNote= {setNote}
-                          />
-                      </div>
-                  </div>
-                  )}
-              </div>
+  if (loginState === "loggedin") {
+    return (
+      <div>
+        <header>
+          <h1>Mood Tracker</h1>
+        </header>
+        <main>
+        <div id="bodyList">
+          <div className="form-section">
+                    <button type="button" className="collapsible" id="collapsible" onClick={() => {
+                      if (showContent) {
+                        setShowContent(false) }
+                      else {
+                        setShowContent(true)}}}>Form</button>
+                    {showContent && (
+                    <div className="content">
+                        <div className="form">
+                            <Form
+                              handleSubmit = {handleSubmit}
+                              mood = {mood}
+                              note = {note}
+                              setMood = {setMood}
+                              setNote= {setNote}
+                            />
+                        </div>
+                    </div>
+                    )}
+                </div>
 
 
-              <div id="entryCard">
-                <h2>Entries</h2>
-              {entries.map((entry) => {
+                <div id="entryCard">
+                  <h2>Entries</h2>
+                {entries.map((entry) => {
 
-                return (
-                  <EntryCard 
-                    key = {entry.id}
-                    entry = {entry}
-                    onEdit= {editEntry}
-                    onDelete = {deleteEntry}
-                    editMood = {editMood}
-                    editState = {editState}
-                    setEditMood = {setEditMood}
-                    saveEdit = {saveEdit}
-                    cancelEdit = {cancelEdit}
+                  return (
+                    <EntryCard 
+                      key = {entry.id}
+                      entry = {entry}
+                      onEdit= {editEntry}
+                      onDelete = {deleteEntry}
+                      editMood = {editMood}
+                      editState = {editState}
+                      setEditMood = {setEditMood}
+                      saveEdit = {saveEdit}
+                      cancelEdit = {cancelEdit}
+                    />
+                )
+                
+                })}
+                <hr id="line-break"/>
+                <h2>Graph</h2>
+                <div id="moodChart">
+                  <Graph
+                    entries = {entries}
                   />
-              )
-              
-              })}
-              <hr id="line-break"/>
-              <h2>Graph</h2>
-              <div id="moodChart">
-                <Graph
-                  entries = {entries}
-                />
-              </div>
+                </div>
 
+                </div>
               </div>
-            </div>
-          </main>
-    </div>
+            </main>
+      </div>
 
-  )
+    )
+  }
+  else {
+    return(
+      <AuthForm setLoginState={setLoginState}/>
+    )
+  }
 }
 export default App; 
