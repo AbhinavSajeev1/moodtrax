@@ -1,0 +1,118 @@
+:root {
+    --primary: #000;
+    --secondary: #FFFFFF;
+    --accent: skyblue;
+    --shadow: 8px 8px 0px var(--primary)
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+    font-family: 'Courier New', monospace 
+}
+
+.auth-page {
+    background-color: var(--secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    min-height: 100vh;
+    padding: 20px;
+
+}
+
+.auth-page #login-page {
+    width: 100%; 
+    max-width: 400px; 
+    border: 1px solid var(--primary);
+    padding: 40px 30px; 
+    background-color: var(--secondary);
+    box-shadow: var(--shadow);
+    position: relative; 
+    border-radius: 12px; 
+
+}
+
+.auth-page #signup-page {
+    width: 100%; 
+    max-width: 400px; 
+    border: 1px solid var(--primary);
+    padding: 40px 30px; 
+    background-color: var(--secondary);
+    box-shadow: var(--shadow);
+    position: relative; 
+    border-radius: 12px; 
+
+}
+
+.auth-page h1 {
+    color: var(--primary);
+    margin-bottom: 30px;
+    text-align: center; 
+    font-size: 40px; 
+}
+
+.auth-page h2 {
+    margin-bottom: 20px; 
+    text-align: center; 
+}
+
+.auth-page .input-group {
+    margin-bottom: 20px; 
+}
+
+.auth-page label {
+    display: block;
+    margin: 20px 0px 20px 0px; 
+    font-weight: bold; 
+    color: var(--primary)
+}
+
+.auth-page input {
+    width: 100%; 
+    padding: 12px 15px; 
+    border: 2px solid var(--primary);
+    background-color: var(--secondary);
+    font-size: 16px;
+    outline: none; 
+    transition: all 0.3s
+}
+
+.auth-page input:focus {
+    box-shadow: 4px 4px 0px var(--primary)
+}
+
+.auth-page button[type="submit"] {
+    width: 100%;
+    padding: 12px; 
+    background-color: var(--accent);
+    color: var(--secondary); 
+    border: 2px solid var(--primary);
+    font-size: 16px; 
+    cursor: pointer; 
+    margin-top: 10px;
+    transition: all 0.3s; 
+}
+
+.auth-page button[type="submit"]:hover {
+    box-shadow: 4px 4px 0px var(--primary);
+    transform: translate(-2px, -2px); 
+}
+
+.auth-page #changeMode {
+    width: 50%; 
+    padding: 12px; 
+    background-color: var(--accent);
+    color: var(--secondary);
+    border: 1px solid black;
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: all 0.3s; 
+    margin-bottom: 10px; 
+
+}
+
+.auth-page #changeMode:hover {
+    background-color: rgb(160, 215, 237);
+}

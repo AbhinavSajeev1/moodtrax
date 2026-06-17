@@ -10,8 +10,6 @@ const { createClient } = require("@supabase/supabase-js");
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY)
 
-
-
 let data = [
     {
         id: 1,
@@ -122,17 +120,6 @@ app.put('/entries/:id', async (req, res) => {
         res.status(500).json({error: "Database error"})
     }
 
-})
-
-
-
-pool.query("SELECT NOW()", (err, result) => {
-    if (err) {
-        console.log(err)
-    }
-    else {
-        console.log(result.rows)
-    }
 })
 
 app.listen(3001, ()=>{

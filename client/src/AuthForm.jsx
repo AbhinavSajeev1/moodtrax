@@ -1,11 +1,9 @@
 import {useState} from "react"; 
 import {useEffect} from "react"; 
 import { createClient } from "@supabase/supabase-js";
+import "./AuthForm.css"
 
-console.log("URL:", import.meta.env.VITE_SUPABASE_URL);
-console.log("KEY:", import.meta.env.VITE_SUPABASE_ANON_KEY);
 const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY)
-
 
 const AuthForm = ({setLoginState}) => {
 
@@ -62,21 +60,24 @@ const AuthForm = ({setLoginState}) => {
         }
     }
 
-
     return (
-
+        <div class="auth-page">
         <div>
             <h1>MoodTrax</h1>
-            <button onClick={switchToSignUp}>Sign Up</button>
-            <button onClick={switchToLogin}>Log In</button>
+            <button id="changeMode" onClick={switchToSignUp}>Sign Up</button>
+            <button id="changeMode" onClick={switchToLogin}>Log In</button>
 
 
             {userView === "login" && (
             <div id="login-page">
                 <h2>Log In</h2>
                 <form  onSubmit={handleSubmit}>
+                    <div className="input-group">
+                    <label>Email Address</label>
                     <input type="email" placeholder="Email Address" required onChange={(e)=>setEmail(e.target.value)}/>
+                    <label>Password</label>
                     <input type="password" placeholder="Password" required onChange={(e)=>setPassword(e.target.value)}/>
+                    </div>
                     <button type="submit">Log In</button>
                 </form>
             </div> 
@@ -86,12 +87,17 @@ const AuthForm = ({setLoginState}) => {
             <div id="signup-page">
                 <h2>Sign Up</h2>
                 <form  onSubmit={handleSubmit}>
-                    <input type="email" placeholder="Email Address" required onChange={(e) => setEmail(e.target.value)}/>
-                    <input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)}/>
-                    <button type="submit">Sign Up</button>
+                    <div className="input-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="Email Address" required onChange={(e) => setEmail(e.target.value)}/>
+                        <label>Password</label>
+                        <input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)}/>
+                    </div>
+                    <button id="submitButton" type="submit">Sign Up</button>
                 </form>
             </div>
             )}
+        </div>
         </div>
 
 
@@ -101,4 +107,3 @@ const AuthForm = ({setLoginState}) => {
 }
 
 export default AuthForm;
-
