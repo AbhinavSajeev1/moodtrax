@@ -28,7 +28,8 @@ main {
 header {
     display: flex; 
     border-bottom: solid 2px lightgray; 
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center; 
 }
 
 nav {
@@ -318,3 +319,14 @@ input[type="submit"] {
     justify-content: center; 
 }
 
+#signoutlink {
+    display: flex;
+    justify-content: flex-end;
+    color: rgb(0, 0, 0);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+#signoutlink:hover {
+    color: rgb(93, 93, 93); 
+}

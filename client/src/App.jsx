@@ -6,6 +6,9 @@ import Graph from "./Graph"
 import AuthForm from "./AuthForm"
 import "./App.css"
 
+import {createClient} from "@supabase/supabase-js";
+const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY)
+
 function App() {
   
 
@@ -88,11 +91,19 @@ function App() {
     setEditState(null)
   }
 
+  const signOut = async () => {
+        const { error } = await supabase.auth.signOut()
+        setLoginState("")
+}
+
+
   if (loginState === "loggedin") {
     return (
       <div>
         <header>
+          <div></div>
           <h1>Mood Tracker</h1>
+          <p><span id="signoutlink" onClick={signOut}>Sign Out</span></p>
         </header>
         <main>
         <div id="bodyList">

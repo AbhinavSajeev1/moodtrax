@@ -120,4 +120,10 @@
 #reroute {
     text-align: center;
     padding-top: 10px;
+    color: black; 
+    transition: all 0.3s;
+}
+
+#reroute:hover {
+    color: rgb(255, 255, 255)
 }
