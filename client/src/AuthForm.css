@@ -116,3 +116,8 @@
 .auth-page #changeMode:hover {
     background-color: rgb(160, 215, 237);
 }
+
+#reroute {
+    text-align: center;
+    padding-top: 10px;
+}

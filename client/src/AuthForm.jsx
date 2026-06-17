@@ -76,10 +76,11 @@ const AuthForm = ({setLoginState}) => {
                     <label>Email Address</label>
                     <input type="email" placeholder="Email Address" required onChange={(e)=>setEmail(e.target.value)}/>
                     <label>Password</label>
-                    <input type="password" placeholder="Password" required onChange={(e)=>setPassword(e.target.value)}/>
+                    <input type="password" placeholder="Password" required onChange={(e)=>setPassword(e.target.value)} minLength="8"/>
                     </div>
                     <button type="submit">Log In</button>
                 </form>
+                <p id="reroute">No account? <span onClick={switchToSignUp} style={{cursor: "pointer", color: "skyblue"}}>Sign up</span></p>
             </div> 
         )}
 
@@ -91,10 +92,13 @@ const AuthForm = ({setLoginState}) => {
                         <label>Email Address</label>
                         <input type="email" placeholder="Email Address" required onChange={(e) => setEmail(e.target.value)}/>
                         <label>Password</label>
-                        <input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)}/>
+                        <input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} minLength="8"/>
                     </div>
                     <button id="submitButton" type="submit">Sign Up</button>
                 </form>
+                <div id="reroute">
+                    <p>Have an account? <span onClick={switchToLogin} style={{cursor: "pointer", color: "skyblue"}}>Log in</span></p>
+                </div>
             </div>
             )}
         </div>
