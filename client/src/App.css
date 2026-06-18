@@ -9,7 +9,7 @@
 }
 
 main {
-    background: linear-gradient(white, lightblue);
+    background: #F8FAFC;
     min-height: 100vh;
 }
 
@@ -21,10 +21,6 @@ main {
     margin-left: 15px; 
 }
 
-#logo:hover {
-    cursor: pointer; 
-}
-
 header {
     display: flex; 
     border-bottom: solid 2px lightgray; 
@@ -32,142 +28,6 @@ header {
     align-items: center; 
 }
 
-nav {
-    width: 100%;
-    background-color: white; 
-    display: flex; 
-    justify-content: flex-end; 
-    gap: 20px;
-    align-items: center;
-
-}
-
-.navlist {
-    display: inline-block;
-    padding: 15px;
-    list-style-type: none; 
-    font-family: "Open Sans", sans-serif; 
-}
-
-a {
-    color: #333333;
-    text-decoration: none;
-    transition: color 0.3s linear;
-
-    -webkit-transition: color 0.3s linear;
-    -moz-transition: color 0.3s linear;
-}
-
-a:hover {
-    color: #F44336;
-
-}
-
-#toolbar-button {
-    color: white; 
-    border: none;
-    background-color: lightgreen; 
-    border-radius: 20px;
-    padding: 10px; 
-    font-family: 'Open Sans', sans-serif;
-    transition: color 0.3s linear;
-    -webkit-transition: color 0.3s linear;
-    -moz-transition: color 0.3s linear;
-}
-
-#toolbar-button:hover {
-    cursor: pointer; 
-    color: rgba(0, 0, 0, 0.737);
-}
-
-.half-width-div {
-    width: 50vw;
-    height: 100vh; 
-    top: 0;
-    left: 0; 
-    padding-left: 100px; 
-}
-
-
-#slogan {
-    padding: 50px 0px 50px 0px;
-    font-family: "Montserrat", sans-serif;
-    font-size: 40px;
-}
-
-#intro {
-    padding: 50px 0px 50px 0px;
-    font-family: "Open Sans", sans-serif;
-    font-size: 25px;
-}
-
-#body-button {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    border: none;
-    background-color: lightgreen; 
-    border-radius: 20px;
-    padding: 15px; 
-    transition-duration: 0.4s;
-    color: white; 
-    font-size: 20px;
-    transition-duration: color 0.3s linear;
-}
-
-#body-button:hover {
-    cursor: pointer;
-    color: rgba(0, 0, 0, 0.737);
-}
-
-.right-half-width-div {
-    float: right;
-    margin-top: -850px;
-    padding-right: 50px;
-}
-
-.header-title {
-    display: flex;
-    justify-content: center;
-    font-family: "Montserrat", sans-serif;
-    padding-top: 50px; 
-}
-
-.all-cards {
-    display: flex; 
-    justify-content: space-evenly;
-}
-.card {
-    display: inline-flex;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.2s;
-    width: 30%; 
-    border-radius: 20px;
-    margin-top: 25px;
-}
-
-.card:hover { 
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.card-text-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 75px; 
-    gap: 20px; 
-
-}
-
-.card-title {
-    font-family: "Montserrat", sans-serif;
-    text-align: center;
-}
-
-.card-text {
-    font-family: "Open Sans", sans-serif;
-    text-align: center;
-}
 
 .form {
     display: flex; 
@@ -186,9 +46,20 @@ label {
 }
 
 input[type=text] {
-    width: 250px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
     margin-bottom: 20px;
+    border: none; 
+    transition: 0.3s all; 
+    text-align: center; 
+    white-space: normal !important;
+    word-break: break-word; 
+}
+
+input[type=text]:focus {
+    outline: none;
+    box-shadow: 8px 8px 0px black;
+    transform: translate(-2px, -2px); 
 }
 
 input[type="range"] {
@@ -197,38 +68,29 @@ input[type="range"] {
 }
 
 input[type="submit"] {
+    all: unset;
+    background-color: skyblue;
     display: block;
     margin: 0 auto;
+    padding: 10px; 
+    cursor: pointer; 
+    transition: 0.3s all;
 }
 
-.collapsible { 
-    background-color: black;
-    color: white; 
-    cursor: pointer;
-    width: 300px;
-    height: 50px; 
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-    outline: none;
-    font-family: "Open Sans", sans-serif;
-    transition: background-color 0.2s linear; 
-}
-
-.active, .collapsible:hover {
-    background-color: #000000d0;
+input[type="submit"]:hover {
+    outline: none; 
+    box-shadow: 4px 4px 0px black
 }
 
 .content {
     display: flex;
     justify-content: center;
     overflow: hidden;
-    background-color: #ccc; 
+    background-color: #E0F2FE;
+    color: #0F172A;
     width: 100%;
     height: 100vh; 
     border-radius: 0px 0px 15px 15px;
-    transition: max-height 0.5s ease-out; 
-    -moz-transition: max-height 0.5s ease-out;
 }
 
 #value {
@@ -304,8 +166,34 @@ input[type="submit"] {
 
 #entriesList {
     display: flex; 
-    gap: 10px; 
-    padding-bottom: 10px;
+    justify-content: space-between;
+    align-items: center; 
+
+    gap: 5px; 
+    background: #FFFFFF;
+    border-radius: 14px;
+    padding: 12px 10px;
+    margin: 5px;
+    transition: all 0.15s ease; 
+}
+
+#entriesList:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px skyblue;
+}
+
+.delete, .edit {
+    margin-left: 10px;
+    outline: none; 
+    border: none; 
+    background-color: lightblue;
+    padding: 10px; 
+    transition: 0.3s all; 
+}
+
+.delete:hover, .edit:hover {
+    background-color: rgb(145, 218, 248);
+    cursor: pointer
 }
 
 #line-break {
@@ -314,8 +202,9 @@ input[type="submit"] {
 
 #moodChart {
     display: flex; 
-    width: 50%;
-    height: 50% fixed;
+    width: 90%;
+    max-width: 1000px;
+    height: 400px;
     justify-content: center; 
 }
 
@@ -325,6 +214,8 @@ input[type="submit"] {
     color: rgb(0, 0, 0);
     transition: all 0.3s;
     cursor: pointer;
+    position: relative;
+    right: 15px; 
 }
 
 #signoutlink:hover {

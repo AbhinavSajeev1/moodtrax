@@ -5,7 +5,7 @@ import "./AuthForm.css"
 
 const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY)
 
-const AuthForm = ({setLoginState}) => {
+const AuthForm = ({ setUserID }) => {
 
     const [userView, setUserView] = useState("login")
     const [email, setEmail] = useState("")
@@ -35,7 +35,8 @@ const AuthForm = ({setLoginState}) => {
             else {
                 setEmail("")
                 setPassword("")
-                setLoginState("loggedin")
+                const { data: { user } } = await supabase.auth.getUser();
+                setUserID(user?.id)
             }
 
         }
@@ -46,22 +47,20 @@ const AuthForm = ({setLoginState}) => {
                 password: password
             })
 
+            if (!error) {
+                setEmail("")
+                setPassword("")
+                setUserID(data.user.id)
+            }
+
             if (error) {
                 console.log(error)
             }
-
-            else {
-                setEmail("")
-                setPassword("")
-                setLoginState("loggedin")
-            }
-
-
         }
     }
 
     return (
-        <div class="auth-page">
+        <div className="auth-page">
         <div>
             <h1>MoodTrax</h1>
             <button id="changeMode" onClick={switchToSignUp}>Sign Up</button>
@@ -71,12 +70,12 @@ const AuthForm = ({setLoginState}) => {
             {userView === "login" && (
             <div id="login-page">
                 <h2>Log In</h2>
-                <form  onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <div className="input-group">
                     <label>Email Address</label>
-                    <input type="email" placeholder="Email Address" required onChange={(e)=>setEmail(e.target.value)}/>
+                    <input type="email" value={email} placeholder="Email Address" required onChange={(e)=>setEmail(e.target.value)}/>
                     <label>Password</label>
-                    <input type="password" placeholder="Password" required onChange={(e)=>setPassword(e.target.value)} minLength="8"/>
+                    <input type="password" value={password} placeholder="Password" required onChange={(e)=>setPassword(e.target.value)} minLength="8"/>
                     </div>
                     <button type="submit">Log In</button>
                 </form>
@@ -90,9 +89,9 @@ const AuthForm = ({setLoginState}) => {
                 <form  onSubmit={handleSubmit}>
                     <div className="input-group">
                         <label>Email Address</label>
-                        <input type="email" placeholder="Email Address" required onChange={(e) => setEmail(e.target.value)}/>
+                        <input type="email" value={email} placeholder="Email Address" required onChange={(e) => setEmail(e.target.value)}/>
                         <label>Password</label>
-                        <input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} minLength="8"/>
+                        <input type="password" value={password} placeholder="Password" required onChange={(e) => setPassword(e.target.value)} minLength="8"/>
                     </div>
                     <button id="submitButton" type="submit">Sign Up</button>
                 </form>

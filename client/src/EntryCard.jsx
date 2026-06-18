@@ -2,7 +2,18 @@ function EntryCard({key, entry, onEdit, onDelete, editMood, editState, setEditMo
 
     const isEditing = editState === entry.id 
 
-    console.log(onDelete)
+    const moodEmoji = {
+        1: "😢",
+        2: "😞",
+        3: "😕",
+        4: "😐",
+        5: "🙂",
+        6: "😊",
+        7: "😄",
+        8: "😁",
+        9: "🤩",
+        10: "🔥"
+    };
 
 
     return (
@@ -19,11 +30,12 @@ function EntryCard({key, entry, onEdit, onDelete, editMood, editState, setEditMo
 
             
         <div id="entriesList">
-                <p>Mood: {entry.mood}</p>
-                <p>Note: {entry.note}</p>
-                <p>Time: {entry.time}</p>
-                <button id="delete" onClick={() => onDelete(entry.id)}>Delete</button>
-                <button id="edit" onClick={() => onEdit(entry.id)}>Edit</button>
+                <p>{moodEmoji[entry.mood]}</p>
+                <p>{entry.mood}</p>
+                <p>{entry.note === "" ? "N/A" : entry.note}</p>
+                <p>{entry.time}</p>
+                <button className="delete" onClick={() => onDelete(entry.id)}>Delete</button>
+                <button className="edit" onClick={() => onEdit(entry.id)}>Edit</button>
         </div>
         )
     );

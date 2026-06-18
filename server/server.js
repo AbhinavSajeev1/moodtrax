@@ -21,9 +21,17 @@ let data = [
 
 app.get("/entries", async (req, res) => {
     try {
-        const result = await supabase
+        const user_id = req.query.user_id
+        let query = supabase
         .from("entries")
-        .select('*')
+        .select('*');
+
+        if (user_id) {
+            query = query.eq("user_id", user_id)
+            console.log(query)
+        }
+
+        const result = await query
 
         if (result.error) {
             res.json({success: false})
@@ -41,22 +49,22 @@ app.get("/entries", async (req, res) => {
 app.post("/entries", async (req, res) => {
 
     try {
-        const {id, mood, note, time} = req.body
+        const {id, mood, note, time, user_id} = req.body
         const entryEnter = await supabase
         .from("entries")
         .insert({
-            id: id, mood: mood, note: note, time: time
+            id: id, mood: mood, note: note, time: time, user_id: user_id
         })
         .select()
 
         if (entryEnter.error) {
             res.json({success: false})
         }
-        else if (entryEnter.data.length = 0) {
+        else if (entryEnter.data.length === 0) {
             res.json({success: false})
         }
         else {
-            res.json({success: true})
+            res.json(entryEnter.data[0])
         }
     }
 
@@ -72,6 +80,7 @@ app.delete('/entries/:id', async (req, res) => {
         const response = await supabase
             .from("entries")
             .delete()
+            .eq('user_id', req.query.user_id)
             .eq('id', id)
             .select()
             console.log(response)
@@ -101,6 +110,7 @@ app.put('/entries/:id', async (req, res) => {
             .from("entries")
             .update({mood})
             .eq('id', id)
+            .eq('user_id', req.query.user_id)
             .select()
 
         console.log(response)
@@ -122,6 +132,6 @@ app.put('/entries/:id', async (req, res) => {
 
 })
 
-app.listen(3001, ()=>{
-    console.log('Server is running')
-})
+const PORT = process.env.PORT || 3001;
+
+app.list(PORT);

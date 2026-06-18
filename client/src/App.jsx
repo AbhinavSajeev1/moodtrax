@@ -19,23 +19,38 @@ function App() {
 
   const[editState, setEditState] = useState(null);
   const[editMood, setEditMood] = useState(0);
-  const[loginState, setLoginState] = useState("")
+  const[userID, setUserID] = useState(null)
 
   useEffect(() => {
 
 
-  const getEntries = async () => {
-      const res = await fetch("http://localhost:3001/entries")
+  const getUserId = async () => {
+      const { data: {user} } = await supabase.auth.getUser()
+      setUserID(user?.id)
+  }
+
+  getUserId();
+  }, []);
+
+  useEffect(()=>{
+
+      if (!userID) {
+        return
+      }
+      const getEntries = async () => {
+      const res = await fetch(`https://moodtrax.onrender.com/entries?user_id=${userID}`)
       const data = await res.json();
       setEntries(data);
   };
-
     getEntries();
+  }, [userID])
 
-    }, [])
+    if (!userID) {
+      return <AuthForm setUserID={setUserID}/>
+    }
     
     const handleSubmit = (e) => {
-    e.preventDefault()
+      e.preventDefault()
 
     fetch("http://localhost:3001/entries", {
       method: "POST", 
@@ -43,32 +58,25 @@ function App() {
         id: crypto.randomUUID(),
         mood: mood, 
         note: note, 
-        time: new Date().toLocaleString()
+        time: new Date().toLocaleString('en-US', {timeStyle: 'short'}),
+        user_id: userID
       }),
       headers: {
         "Content-type" : "application/json; charset=UTF-8"
       }
     })
+
     .then(res=> res.json())
     .then(data => {
-      console.log("Server response:", data)
+      setEntries([...entries, data])
     })
 
-
-    const newEntry = {
-      id: crypto.randomUUID(),
-      mood: mood,
-      note: note,
-      time: new Date().toLocaleString()
-    };
-
-    setEntries([...entries, newEntry]);
     setNote("");
     setMood(5);
   }
 
   const deleteEntry = async (id) => {
-    await fetch(`http://localhost:3001/entries/${id}`, {method: 'DELETE'})
+    await fetch(`https://moodtrax.onrender.com/entries/${id}`, {method: 'DELETE'})
 
     setEntries(prev => prev.filter(entry => entry.id !== id))
   }
@@ -79,7 +87,7 @@ function App() {
   }
 
   const saveEdit = async () => {
-    await fetch(`http://localhost:3001/entries/${editState}`, {method: 'PUT', headers: { "Content-Type": "application/json" }, body: JSON.stringify({mood: editMood} )})
+    await fetch(`https://moodtrax.onrender.com/entries/${editState}`, {method: 'PUT', headers: { "Content-Type": "application/json" }, body: JSON.stringify({mood: editMood} )})
     setEntries(prev => prev.map(entry => entry.id === editState 
       ? {...entry, mood: editMood}
       : entry
@@ -93,27 +101,21 @@ function App() {
 
   const signOut = async () => {
         const { error } = await supabase.auth.signOut()
-        setLoginState("")
+        setUserID(null)
 }
 
 
-  if (loginState === "loggedin") {
+  if (userID) {
     return (
       <div>
         <header>
           <div></div>
-          <h1>Mood Tracker</h1>
+          <h1>MoodTrax</h1>
           <p><span id="signoutlink" onClick={signOut}>Sign Out</span></p>
         </header>
         <main>
         <div id="bodyList">
           <div className="form-section">
-                    <button type="button" className="collapsible" id="collapsible" onClick={() => {
-                      if (showContent) {
-                        setShowContent(false) }
-                      else {
-                        setShowContent(true)}}}>Form</button>
-                    {showContent && (
                     <div className="content">
                         <div className="form">
                             <Form
@@ -125,14 +127,12 @@ function App() {
                             />
                         </div>
                     </div>
-                    )}
                 </div>
 
 
                 <div id="entryCard">
                   <h2>Entries</h2>
                 {entries.map((entry) => {
-
                   return (
                     <EntryCard 
                       key = {entry.id}
@@ -165,7 +165,7 @@ function App() {
   }
   else {
     return(
-      <AuthForm setLoginState={setLoginState}/>
+      <AuthForm setUserID={setUserID}/>
     )
   }
 }
