@@ -134,4 +134,4 @@ app.put('/entries/:id', async (req, res) => {
 
 const PORT = process.env.PORT || 3001;
 
-app.list(PORT);
+app.listen(PORT);
