@@ -10,13 +10,16 @@ const AuthForm = ({ setUserID }) => {
     const [userView, setUserView] = useState("login")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [loginError, setLoginError] = useState(null)
 
     const switchToSignUp = () => {
         setUserView("signup")
+        setLoginError(null)
     }
 
     const switchToLogin = () => {
         setUserView("login")
+        setLoginError(null)
     }
 
     const handleSubmit = async (e) => {
@@ -30,6 +33,7 @@ const AuthForm = ({ setUserID }) => {
 
             if (error) {
                 console.log(error)
+                setLoginError(error.message)
             }
 
             else {
@@ -55,6 +59,7 @@ const AuthForm = ({ setUserID }) => {
 
             if (error) {
                 console.log(error)
+                setLoginError(error.message)
             }
         }
     }
@@ -77,6 +82,11 @@ const AuthForm = ({ setUserID }) => {
                     <label>Password</label>
                     <input type="password" value={password} placeholder="Password" required onChange={(e)=>setPassword(e.target.value)} minLength="8"/>
                     </div>
+                    {loginError && (
+                        <div className="errorBlock">
+                            <span>❌ {loginError}</span>
+                        </div>
+                    )}
                     <button type="submit">Log In</button>
                 </form>
                 <p id="reroute">No account? <span onClick={switchToSignUp} style={{cursor: "pointer", color: "skyblue"}}>Sign up</span></p>
@@ -93,6 +103,11 @@ const AuthForm = ({ setUserID }) => {
                         <label>Password</label>
                         <input type="password" value={password} placeholder="Password" required onChange={(e) => setPassword(e.target.value)} minLength="8"/>
                     </div>
+                    {loginError && (
+                        <div className="errorBlock">
+                            <span>❌ {loginError}</span>
+                        </div>
+                    )}
                     <button id="submitButton" type="submit">Sign Up</button>
                 </form>
                 <div id="reroute">
