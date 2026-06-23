@@ -76,7 +76,7 @@ function App() {
   }
 
   const deleteEntry = async (id) => {
-    await fetch(`${import.meta.env.VITE_API_URL}/entries/${id}?user_id=${user}`, {method: 'DELETE'})
+    await fetch(`${import.meta.env.VITE_API_URL}/entries/${id}?user_id=${userID}`, {method: 'DELETE'})
 
     setEntries(prev => prev.filter(entry => entry.id !== id))
   }
