@@ -38,7 +38,7 @@ function App() {
         return
       }
       const getEntries = async () => {
-      const res = await fetch(`https://moodtrax.onrender.com/entries?user_id=${userID}`)
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/entries?user_id=${userID}`)
       const data = await res.json();
       setEntries(data);
   };
@@ -51,8 +51,9 @@ function App() {
     
     const handleSubmit = (e) => {
       e.preventDefault()
+      
 
-    fetch("http://localhost:3001/entries", {
+    fetch(`${import.meta.env.VITE_API_URL}/entries`, {
       method: "POST", 
       body: JSON.stringify({
         id: crypto.randomUUID(),
@@ -68,15 +69,14 @@ function App() {
 
     .then(res=> res.json())
     .then(data => {
-      setEntries([...entries, data])
+      setEntries(prev => [...prev, data])
     })
-
     setNote("");
     setMood(5);
   }
 
   const deleteEntry = async (id) => {
-    await fetch(`https://moodtrax.onrender.com/entries/${id}`, {method: 'DELETE'})
+    await fetch(`${import.meta.env.VITE_API_URL}/entries/${id}?user_id=${user}`, {method: 'DELETE'})
 
     setEntries(prev => prev.filter(entry => entry.id !== id))
   }
@@ -87,7 +87,7 @@ function App() {
   }
 
   const saveEdit = async () => {
-    await fetch(`https://moodtrax.onrender.com/entries/${editState}`, {method: 'PUT', headers: { "Content-Type": "application/json" }, body: JSON.stringify({mood: editMood} )})
+    await fetch(`${import.meta.env.VITE_API_URL}/entries/${editState}?user_id=${userID}`, {method: 'PUT', headers: { "Content-Type": "application/json" }, body: JSON.stringify({mood: editMood} )})
     setEntries(prev => prev.map(entry => entry.id === editState 
       ? {...entry, mood: editMood}
       : entry
