@@ -20,9 +20,12 @@ function EntryCard({key, entry, onEdit, onDelete, editMood, editState, setEditMo
 
         isEditing ? (
             <>
+                <p><span>{editMood}</span></p>
                 <input type="range" min="1" max="10" className="slider" id="myRange" value={editMood} onChange={(e) => setEditMood(Number((e.target.value)))}/><br/>
-                <button onClick={saveEdit}>Save</button>
-                <button onClick={cancelEdit}>Cancel</button>
+                <div className="save-cancel-group">
+                    <button className="save" onClick={saveEdit}>Save</button>
+                    <button className="cancel" onClick={cancelEdit}>Cancel</button>
+                </div>
             </>
             
         ) : (
@@ -35,7 +38,7 @@ function EntryCard({key, entry, onEdit, onDelete, editMood, editState, setEditMo
                 <p>{entry.note === "" ? "N/A" : entry.note}</p>
                 <p>{entry.time}</p>
                 <button className="delete" onClick={() => onDelete(entry.id)}>Delete</button>
-                <button className="edit" onClick={() => onEdit(entry.id)}>Edit</button>
+                <button className="edit" onClick={() => onEdit(entry.id, entry.mood)}>Edit</button>
         </div>
         )
     );

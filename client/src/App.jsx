@@ -20,9 +20,9 @@ function App() {
   const[editState, setEditState] = useState(null);
   const[editMood, setEditMood] = useState(0);
   const[userID, setUserID] = useState(null)
+  const [loadingState, setLoadingState] = useState(false)
 
   useEffect(() => {
-
 
   const getUserId = async () => {
       const { data: {user} } = await supabase.auth.getUser()
@@ -33,14 +33,15 @@ function App() {
   }, []);
 
   useEffect(()=>{
-
+    setLoadingState(true)
       if (!userID) {
         return
       }
       const getEntries = async () => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/entries?user_id=${userID}`)
-      const data = await res.json();
-      setEntries(data);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/entries?user_id=${userID}`)
+        const data = await res.json();
+        setEntries(data);
+        setLoadingState(false)
   };
     getEntries();
   }, [userID])
@@ -84,6 +85,7 @@ function App() {
   const editEntry = (id, currentMood) => {
     setEditState(id)
     setEditMood(currentMood)
+    console.log(editMood)
   }
 
   const saveEdit = async () => {
@@ -92,7 +94,9 @@ function App() {
       ? {...entry, mood: editMood}
       : entry
     ))
+    console.log(editMood)
     setEditState(null);
+
 }
 
   const cancelEdit = () => {
@@ -105,7 +109,15 @@ function App() {
 }
 
 
-  if (userID) {
+  if (loadingState == true) {
+    return(
+      <div className="lds-parent">
+      <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+      </div>
+    )
+  }
+
+  else if (userID) {
     return (
       <div>
         <header>
@@ -163,6 +175,8 @@ function App() {
 
     )
   }
+
+
   else {
     return(
       <AuthForm setUserID={setUserID}/>

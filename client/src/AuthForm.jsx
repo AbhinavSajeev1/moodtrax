@@ -89,7 +89,7 @@ const AuthForm = ({ setUserID }) => {
                     )}
                     <button type="submit">Log In</button>
                 </form>
-                <p id="reroute">No account? <span onClick={switchToSignUp} style={{cursor: "pointer", color: "skyblue"}}>Sign up</span></p>
+                <p id="reroute">No account? <span className="rerouteLink" onClick={switchToSignUp}>Sign up</span></p>
             </div> 
         )}
 
@@ -111,7 +111,7 @@ const AuthForm = ({ setUserID }) => {
                     <button id="submitButton" type="submit">Sign Up</button>
                 </form>
                 <div id="reroute">
-                    <p>Have an account? <span onClick={switchToLogin} style={{cursor: "pointer", color: "skyblue"}}>Log in</span></p>
+                    <p>Have an account? <span onClick={switchToLogin} className="rerouteLink">Log in</span></p>
                 </div>
             </div>
             )}

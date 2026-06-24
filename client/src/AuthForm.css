@@ -110,7 +110,6 @@
     cursor: pointer; 
     transition: all 0.3s; 
     margin-bottom: 10px; 
-
 }
 
 .auth-page #changeMode:hover {
@@ -122,4 +121,14 @@
     padding-top: 10px;
     color: black; 
     transition: all 0.3s;
+}
+
+.rerouteLink {
+    cursor: pointer; 
+    color: skyblue;
+    transition: 0.3s all; 
+}
+
+.rerouteLink:hover {
+    color: rgb(173, 220, 239)
 }
