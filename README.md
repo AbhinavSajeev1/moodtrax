@@ -13,10 +13,10 @@ Visit the app here: [moodtrax.vercel.app](https://moodtrax.vercel.app)
 ## Screenshots
 
 ### Login Screen
-![Login](screenshots/image1.jpg)
+![Login](screenshots/image1.png)
 
 ### App Page
-![App](screenshots/image2.jpg)
+![App](screenshots/image2.png)
 
 ## Tech Stack
 - Frontend: HTML, CSS, JavaScript, React
