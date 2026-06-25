@@ -66,12 +66,15 @@ const AuthForm = ({ setUserID }) => {
         }
     }
 
+    console.log(import.meta.env.VITE_API_URL)
+
     return (
         <div className="auth-page">
         <div>
             <h1>MoodTrax</h1>
             <button id="changeMode" onClick={switchToSignUp}>Sign Up</button>
             <button id="changeMode" onClick={switchToLogin}>Log In</button>
+            
 
 
             {userView === "login" && (
