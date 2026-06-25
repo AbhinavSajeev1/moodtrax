@@ -40,7 +40,6 @@ function App() {
       const getEntries = async () => {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/entries?user_id=${userID}`)
         const data = await res.json();
-        console.log('Entries response:', data);
         setEntries(data);
         setLoadingState(false)
   };
@@ -86,7 +85,6 @@ function App() {
   const editEntry = (id, currentMood) => {
     setEditState(id)
     setEditMood(currentMood)
-    console.log(editMood)
   }
 
   const saveEdit = async () => {
@@ -95,7 +93,6 @@ function App() {
       ? {...entry, mood: editMood}
       : entry
     ))
-    console.log(editMood)
     setEditState(null);
 
 }
