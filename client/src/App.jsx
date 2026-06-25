@@ -40,6 +40,7 @@ function App() {
       const getEntries = async () => {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/entries?user_id=${userID}`)
         const data = await res.json();
+        console.log('Entries response:', data);
         setEntries(data);
         setLoadingState(false)
   };
