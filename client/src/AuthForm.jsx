@@ -65,9 +65,7 @@ const AuthForm = ({ setUserID }) => {
             }
         }
     }
-
-    console.log(import.meta.env.VITE_API_URL)
-
+    
     return (
         <div className="auth-page">
         <div>
