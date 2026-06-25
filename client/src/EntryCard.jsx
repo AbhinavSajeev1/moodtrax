@@ -29,14 +29,16 @@ function EntryCard({key, entry, onEdit, onDelete, editMood, editState, setEditMo
             </>
             
         ) : (
-
-
             
         <div id="entriesList">
-                <p>{moodEmoji[entry.mood]}</p>
-                <p>{entry.mood}</p>
-                <p>{entry.note === "" ? "N/A" : entry.note}</p>
-                <p>{entry.time}</p>
+                <div className="moodGroup"> 
+                    <p>{moodEmoji[entry.mood]} {entry.mood}</p>
+                </div>
+                <div className="moodDetails">
+                    <p>{entry.note === "" ? "No note added" : `"${entry.note}"`}</p>
+                    <p>{entry.time}</p>
+                </div>
+
                 <button className="delete" onClick={() => onDelete(entry.id)}>Delete</button>
                 <button className="edit" onClick={() => onEdit(entry.id, entry.mood)}>Edit</button>
         </div>

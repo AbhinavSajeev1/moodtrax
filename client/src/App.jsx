@@ -60,7 +60,7 @@ function App() {
         id: crypto.randomUUID(),
         mood: mood, 
         note: note, 
-        time: new Date().toLocaleString('en-US', {timeStyle: 'short'}),
+        time: new Date().toLocaleString('en-US'),
         user_id: userID
       }),
       headers: {
@@ -113,6 +113,7 @@ function App() {
     return(
       <div className="lds-parent">
       <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+      <p>Loading your entries...</p>
       </div>
     )
   }
@@ -143,9 +144,12 @@ function App() {
 
 
                 <div id="entryCard">
-                  <h2>Entries</h2>
-                {entries.map((entry) => {
-                  return (
+                  <h2>Entries</h2> 
+
+                {
+                  entries.length === 0 ? 
+                    <p className="no-entries">No entries yet! Enter some in the form.</p>
+                  : entries.map((entry) => (
                     <EntryCard 
                       key = {entry.id}
                       entry = {entry}
@@ -157,15 +161,18 @@ function App() {
                       saveEdit = {saveEdit}
                       cancelEdit = {cancelEdit}
                     />
-                )
-                
-                })}
+                  ))}
                 <hr id="line-break"/>
                 <h2>Graph</h2>
                 <div id="moodChart">
-                  <Graph
-                    entries = {entries}
-                  />
+                  {
+                    entries.length === 0 ? 
+                      <p>No entries to graph! Enter some in the form. </p>
+                    :
+                    <Graph
+                      entries = {entries}
+                    />
+                  }
                 </div>
 
                 </div>

@@ -15,11 +15,13 @@ const AuthForm = ({ setUserID }) => {
     const switchToSignUp = () => {
         setUserView("signup")
         setLoginError(null)
+        setEmail("")
     }
 
     const switchToLogin = () => {
         setUserView("login")
         setLoginError(null)
+        setPassword("")
     }
 
     const handleSubmit = async (e) => {
