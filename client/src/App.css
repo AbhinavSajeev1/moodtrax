@@ -183,7 +183,15 @@ input[type="submit"]:hover {
 .entryGroup {
     height: 375px; 
     overflow-y: scroll;
+    width: 425px; 
 }
+
+.entryNoteOverflow {
+    width: 115px; 
+    text-align: center;
+    overflow-wrap: break-word; 
+}
+
 /* hides for chrome, safari, opera */
 .entryGroup::-webkit-scrollbar {
   display: none;
@@ -235,9 +243,17 @@ input[type="submit"]:hover {
 }
 
 .save-cancel-group {
-    display: inline-block;  
+    text-align: center;
     padding: 10px; 
+
 }
+
+.save, .cancel{
+    display: inline-block;  
+    
+}
+
+
 
 #line-break {
     width: 100%
@@ -324,4 +340,8 @@ input[type="submit"]:hover {
 
 .no-graph {
     padding: 10px; 
+}
+
+.editMoodNumber {
+    text-align: center;
 }
