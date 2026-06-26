@@ -1,5 +1,6 @@
 import {useState} from "react"; 
 import {useEffect} from "react"; 
+import {useRef} from "react";
 import EntryCard from "./EntryCard"
 import Form from "./form"
 import Graph from "./Graph"
@@ -21,6 +22,10 @@ function App() {
   const[editMood, setEditMood] = useState(0);
   const[userID, setUserID] = useState(null)
   const [loadingState, setLoadingState] = useState(false)
+
+  
+  const entriesRef = useRef(null);
+
 
   useEffect(() => {
 
@@ -44,7 +49,14 @@ function App() {
         setLoadingState(false)
   };
     getEntries();
+
   }, [userID])
+
+  useEffect(() => {
+      if (entriesRef.current) {
+        entriesRef.current.scrollTop = entriesRef.current.scrollHeight
+    }
+  }, [entries])
 
     if (!userID) {
       return <AuthForm setUserID={setUserID}/>
@@ -143,6 +155,8 @@ function App() {
 
                 <div id="entryCard">
                   <h2>Entries</h2> 
+                  <div className="entryGroup" ref={entriesRef}>
+
 
                 {
                   entries.length === 0 ? 
@@ -160,12 +174,14 @@ function App() {
                       cancelEdit = {cancelEdit}
                     />
                   ))}
+                </div>
                 <hr id="line-break"/>
+
                 <h2>Graph</h2>
                 <div id="moodChart">
                   {
                     entries.length === 0 ? 
-                      <p>No entries to graph! Enter some in the form. </p>
+                      <p className="no-graph">No entries to graph! Enter some in the form. </p>
                     :
                     <Graph
                       entries = {entries}

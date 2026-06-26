@@ -13,6 +13,10 @@ main {
     min-height: 100vh;
 }
 
+body {
+    overflow: hidden
+}
+
 
 #logo {
     width: 333px;
@@ -176,6 +180,21 @@ input[type="submit"]:hover {
     transition: all 0.15s ease; 
 }
 
+.entryGroup {
+    height: 375px; 
+    overflow-y: scroll;
+}
+/* hides for chrome, safari, opera */
+.entryGroup::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.entryGroup {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .moodGroup {
     display: flex;
     padding-right: 10px;
@@ -303,3 +322,6 @@ input[type="submit"]:hover {
     padding: 10px; 
 }
 
+.no-graph {
+    padding: 10px; 
+}
