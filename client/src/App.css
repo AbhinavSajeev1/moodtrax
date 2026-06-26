@@ -183,11 +183,11 @@ input[type="submit"]:hover {
 .entryGroup {
     height: 375px; 
     overflow-y: scroll;
-    width: 425px; 
+    width: 450px; 
 }
 
 .entryNoteOverflow {
-    width: 120px; 
+    width: 130px; 
     text-align: center;
     overflow-wrap: break-word; 
 }
@@ -205,7 +205,8 @@ input[type="submit"]:hover {
 
 .moodGroup {
     display: flex;
-    padding-right: 10px;
+    padding-right: 5px;
+    width: 60px; 
 }
 
 .moodDetails {

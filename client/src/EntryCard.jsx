@@ -39,6 +39,7 @@ function EntryCard({key, entry, onEdit, onDelete, editMood, editState, setEditMo
                         <p>{entry.note === "" ? "No note added" : `"${entry.note}"`}</p>
                     </div>
                     <p>{entry.time}</p>
+
                 </div>
 
                 <button className="delete" onClick={() => onDelete(entry.id)}>Delete</button>
