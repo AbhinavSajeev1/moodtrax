@@ -118,7 +118,6 @@ input[type="submit"]:hover {
 
 #canvas-div {
     display: flex;
-
     justify-content: center;
     flex: 1;
     width: 100%;
@@ -183,7 +182,7 @@ input[type="submit"]:hover {
 .entryGroup {
     height: 375px; 
     overflow-y: scroll;
-    width: 450px; 
+    width: 420px; 
 }
 
 .entryNoteOverflow {
@@ -261,11 +260,12 @@ input[type="submit"]:hover {
 }
 
 #moodChart {
-    display: flex; 
-    width: 90%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
     max-width: 1000px;
     height: 400px;
-    justify-content: center; 
+
 }
 
 #signoutlink {
@@ -337,6 +337,7 @@ input[type="submit"]:hover {
 
 .no-entries {
     padding: 10px; 
+    text-align: center;
 }
 
 .no-graph {

@@ -133,7 +133,7 @@ function App() {
       <div>
         <header>
           <div></div>
-          <h1>MoodTrax</h1>
+          <h1 className="header-title">MoodTrax</h1>
           <p><span id="signoutlink" onClick={signOut}>Sign Out</span></p>
         </header>
         <main>
@@ -188,7 +188,6 @@ function App() {
                     />
                   }
                 </div>
-
                 </div>
               </div>
             </main>

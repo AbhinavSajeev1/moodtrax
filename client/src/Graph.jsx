@@ -6,7 +6,37 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 function Graph({entries}) {
 
-        const options = {};
+        const options = {
+                plugins: {
+                    legend: {
+                        position: "top",
+                        align: 'center',
+                        labels: {
+                            color: 'skyblue'
+                        }
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 0, 
+                        right: 0
+                    }
+                },
+            scales: {
+                x: {
+                    ticks: {
+                        color: 'black'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: 'skyblue'
+                    },
+                    afterFit: (scaleInstance) => {
+                        scaleInstance.paddingRight = 100; }
+                }
+            }
+        };
 
         const data = {
             labels: entries.map((entry)=> entry.time),
@@ -17,28 +47,7 @@ function Graph({entries}) {
                     backgroundColor: [ 'skyblue' ],
                     borderColor: ['skyblue']
                 }
-            ], 
-            options: {
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: 'skyblue'
-                        }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    ticks: {
-                        color: 'skyblue'
-                    }
-                },
-                y: {
-                    ticks: {
-                        color: 'skyblue'
-                    }
-                }
-            }
+            ],
         };
 
         return <Line options={options} data={data}/>
