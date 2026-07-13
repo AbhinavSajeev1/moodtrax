@@ -16,11 +16,13 @@ const AuthForm = ({ setUserID }) => {
         setUserView("signup")
         setLoginError(null)
         setEmail("")
+        setPassword("")
     }
 
     const switchToLogin = () => {
         setUserView("login")
         setLoginError(null)
+        setEmail("")
         setPassword("")
     }
 
